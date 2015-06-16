@@ -47,6 +47,7 @@ while True:
         startTime=time.time()
         title = filepath()
         htmlPath='D:\\tmp\\backup\\'
+        makedr('backup','D:\\tmp\\')
         new_htmlPath=makedr(title,htmlPath)
         print
         f=urllib2.urlopen('http://m.sohu.com')
@@ -62,12 +63,10 @@ while True:
         cssPath=makedr('css',new_htmlPath)
         for n in addrcss:
             getFile(n,cssPath)
-        addrimg=re.findall('\<img src=\".*?\"',buf)
+        addrImg=re.findall('http:\/\/.*?\.jpg|http:\/\/.*?\.png',buf)
         imagePath=makedr('images',new_htmlPath)
-        for i in addrimg:
-            addr1=i.split('\"')[1:2]
-            for j in addr1:
-                getFile(j,imagePath)
+        for i in addrImg:
+            getFile(i,imagePath)
     stopTime=time.time()
 
 
